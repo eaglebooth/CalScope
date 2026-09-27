@@ -1,0 +1,321 @@
+{
+  "contract": "0x89c65F2c7999CC55Ee8E21A35768CD9B1269e956",
+  "network": "GenLayer Studionet 61999",
+  "sourceCommit": "e0805c2361acecee24127176e0a15c3a52fe47d7",
+  "actors": {
+    "calibrator": "0xeb57bc7125fa60d7482CE12058397369AB3581f8",
+    "facilityQaAndOperator": "0x2da5393d7BBb9A037dc3abB56DbbC5C150fc843f"
+  },
+  "sources": {
+    "certificate": {
+      "url": "https://raw.githubusercontent.com/eaglebooth/CalScope/e0805c2361acecee24127176e0a15c3a52fe47d7/fixtures/CERTIFICATE.md",
+      "sha256": "54bcaba189b96b90004c31c98cce27dec2477a0155ccc7908391491fdc764cf7",
+      "bytes": 443
+    },
+    "requirement": {
+      "url": "https://raw.githubusercontent.com/eaglebooth/ClaimAnchor/b91162fe9973e252ca9016430893d4c7b19d6296/CALSCOPE_REQUIREMENT_JOB_204.md",
+      "sha256": "c091dd2a343f46c36e529e8057dde8572d8c278594fc3ffa5ba2ca9316ca66e3",
+      "bytes": 673
+    }
+  },
+  "transactions": [
+    {
+      "label": "reject unregistered certificate issuer",
+      "method": "issue_certificate",
+      "expected": "ERROR",
+      "hash": "0x2c832183dda6f14136a877e928bea3ec628076037e9d25239393f75cc71155c7",
+      "status": "FINALIZED",
+      "execution": "ERROR"
+    },
+    {
+      "label": "issue authenticated certificate",
+      "method": "issue_certificate",
+      "expected": "SUCCESS",
+      "hash": "0xd30eab82d23d0745c20bcbb6e539537fdc1fb59549d5f75515f057b85feb863d",
+      "status": "FINALIZED",
+      "execution": "SUCCESS"
+    },
+    {
+      "label": "reject wrong facility QA",
+      "method": "seal_requirement",
+      "expected": "ERROR",
+      "hash": "0x3246ce945241f1d65b457e6a08959f0a7f7ba3b4be5461b816c1586adf75d2e7",
+      "status": "FINALIZED",
+      "execution": "ERROR"
+    },
+    {
+      "label": "seal authenticated requirement",
+      "method": "seal_requirement",
+      "expected": "SUCCESS",
+      "hash": "0xf227d3424a6f73a2ee973ebcb4601fafe520fcb9eba60c9e40deb99f65b9787e",
+      "status": "FINALIZED",
+      "execution": "SUCCESS"
+    },
+    {
+      "label": "assess applicability",
+      "method": "assess",
+      "expected": "SUCCESS",
+      "hash": "0x4b566df3885ff6dde9ec22c91087085e05ca5122d42861cd30dfb5076205798e",
+      "status": "FINALIZED",
+      "execution": "SUCCESS"
+    },
+    {
+      "label": "reject wrong operator",
+      "method": "consume_authorization",
+      "expected": "ERROR",
+      "hash": "0x180c2c8393334128f7b45b6395dc2dfb5cb3b9d388498d9312523efb43d72c64",
+      "status": "FINALIZED",
+      "execution": "ERROR"
+    },
+    {
+      "label": "consume authorization once",
+      "method": "consume_authorization",
+      "expected": "SUCCESS",
+      "hash": "0x6f78b34074f72bd545753ba3547ce026bcf6c7118b474919fa67851be64e8195",
+      "status": "FINALIZED",
+      "execution": "SUCCESS"
+    },
+    {
+      "label": "reject authorization replay",
+      "method": "consume_authorization",
+      "expected": "ERROR",
+      "hash": "0xe17bdfc947863b2777f6ffd8e204efe76d44fa1d484fab46f303797ce8cb2876",
+      "status": "FINALIZED",
+      "execution": "ERROR"
+    }
+  ],
+  "assertions": [
+    {
+      "label": "deployed CalScope V1",
+      "pass": true,
+      "details": {
+        "name": "CalScope",
+        "schema": "calibration-applicability-capability-v1",
+        "version": 1
+      }
+    },
+    {
+      "label": "wallet A is registered calibrator",
+      "pass": true,
+      "details": {
+        "address": "0xeb57bc7125fa60d7482CE12058397369AB3581f8"
+      }
+    },
+    {
+      "label": "wallet B is registered facility QA",
+      "pass": true,
+      "details": {
+        "address": "0x2da5393d7BBb9A037dc3abB56DbbC5C150fc843f"
+      }
+    },
+    {
+      "label": "reject unregistered certificate issuer finalized with ERROR",
+      "pass": true,
+      "details": {
+        "hash": "0x2c832183dda6f14136a877e928bea3ec628076037e9d25239393f75cc71155c7",
+        "status": "FINALIZED",
+        "execution": "ERROR"
+      }
+    },
+    {
+      "label": "issue authenticated certificate finalized with SUCCESS",
+      "pass": true,
+      "details": {
+        "hash": "0xd30eab82d23d0745c20bcbb6e539537fdc1fb59549d5f75515f057b85feb863d",
+        "status": "FINALIZED",
+        "execution": "SUCCESS"
+      }
+    },
+    {
+      "label": "reject wrong facility QA finalized with ERROR",
+      "pass": true,
+      "details": {
+        "hash": "0x3246ce945241f1d65b457e6a08959f0a7f7ba3b4be5461b816c1586adf75d2e7",
+        "status": "FINALIZED",
+        "execution": "ERROR"
+      }
+    },
+    {
+      "label": "seal authenticated requirement finalized with SUCCESS",
+      "pass": true,
+      "details": {
+        "hash": "0xf227d3424a6f73a2ee973ebcb4601fafe520fcb9eba60c9e40deb99f65b9787e",
+        "status": "FINALIZED",
+        "execution": "SUCCESS"
+      }
+    },
+    {
+      "label": "certificate canonical readback",
+      "pass": true,
+      "details": {
+        "active": true,
+        "certificate_id": "CAL-2026-017",
+        "device_serial": "BAL-17",
+        "evidence_bytes": 443,
+        "evidence_sha256": "54bcaba189b96b90004c31c98cce27dec2477a0155ccc7908391491fdc764cf7",
+        "evidence_url": "https://raw.githubusercontent.com/eaglebooth/CalScope/e0805c2361acecee24127176e0a15c3a52fe47d7/fixtures/CERTIFICATE.md",
+        "exists": true,
+        "issuer": "0xeb57bc7125fa60d7482ce12058397369ab3581f8",
+        "issuer_authority_revision": 1,
+        "issuer_repository": "eaglebooth/calscope",
+        "revision": 1
+      }
+    },
+    {
+      "label": "requirement canonical readback",
+      "pass": true,
+      "details": {
+        "device_serial": "BAL-17",
+        "evidence_bytes": 673,
+        "evidence_sha256": "c091dd2a343f46c36e529e8057dde8572d8c278594fc3ffa5ba2ca9316ca66e3",
+        "evidence_url": "https://raw.githubusercontent.com/eaglebooth/ClaimAnchor/b91162fe9973e252ca9016430893d4c7b19d6296/CALSCOPE_REQUIREMENT_JOB_204.md",
+        "exists": true,
+        "facility_authority_revision": 1,
+        "facility_id": "north-lab",
+        "facility_repository": "eaglebooth/claimanchor",
+        "job_id": "JOB-204",
+        "operator": "0x2da5393d7bbb9a037dc3abb56dbbc5c150fc843f",
+        "qa": "0x2da5393d7bbb9a037dc3abb56dbbc5c150fc843f",
+        "revision": 1
+      }
+    },
+    {
+      "label": "assess applicability finalized with SUCCESS",
+      "pass": true,
+      "details": {
+        "hash": "0x4b566df3885ff6dde9ec22c91087085e05ca5122d42861cd30dfb5076205798e",
+        "status": "FINALIZED",
+        "execution": "SUCCESS"
+      }
+    },
+    {
+      "label": "consensus created applicable authorization",
+      "pass": true,
+      "details": {
+        "assessment_id": "d539ec67b9fed659d70cbe4c79e4e174d3b6e8e85a95decb1836277698c46269",
+        "authorization_id": "f6fa908fcc00e458f3e0987097d2be8175425146cd3841264c041d9f2cd8aea3",
+        "certificate_key": "0xeb57bc7125fa60d7482ce12058397369ab3581f8:CAL-2026-017",
+        "certificate_revision": 1,
+        "decision_digest": "5c0e8e941e7ceb592b3a115006dbcecfbc1c9b5cc9d08fcf01a3c7fd25ea7247",
+        "exists": true,
+        "requirement_key": "north-lab:JOB-204",
+        "requirement_revision": 1,
+        "verdict": "APPLICABLE"
+      }
+    },
+    {
+      "label": "reject wrong operator finalized with ERROR",
+      "pass": true,
+      "details": {
+        "hash": "0x180c2c8393334128f7b45b6395dc2dfb5cb3b9d388498d9312523efb43d72c64",
+        "status": "FINALIZED",
+        "execution": "ERROR"
+      }
+    },
+    {
+      "label": "consume authorization once finalized with SUCCESS",
+      "pass": true,
+      "details": {
+        "hash": "0x6f78b34074f72bd545753ba3547ce026bcf6c7118b474919fa67851be64e8195",
+        "status": "FINALIZED",
+        "execution": "SUCCESS"
+      }
+    },
+    {
+      "label": "reject authorization replay finalized with ERROR",
+      "pass": true,
+      "details": {
+        "hash": "0xe17bdfc947863b2777f6ffd8e204efe76d44fa1d484fab46f303797ce8cb2876",
+        "status": "FINALIZED",
+        "execution": "ERROR"
+      }
+    },
+    {
+      "label": "authorization consumed with receipt",
+      "pass": true,
+      "details": {
+        "assessment_id": "d539ec67b9fed659d70cbe4c79e4e174d3b6e8e85a95decb1836277698c46269",
+        "authorization_id": "f6fa908fcc00e458f3e0987097d2be8175425146cd3841264c041d9f2cd8aea3",
+        "binding_digest": "093c6f77384612df4d299751cbc76bd1978d17709fdc97dcdad3d6ea1832abed",
+        "consumed": true,
+        "device_serial": "BAL-17",
+        "exists": true,
+        "job_id": "JOB-204",
+        "operator": "0x2da5393d7bbb9a037dc3abb56dbbc5c150fc843f",
+        "receipt": "656d599b729efe38fc8b6d83c95f75efac668b34d4e1768c40aedd30596c71f4"
+      }
+    },
+    {
+      "label": "canonical final counters",
+      "pass": true,
+      "details": {
+        "assessments": 1,
+        "certificates": 1,
+        "consumed": 1,
+        "requirements": 1
+      }
+    }
+  ],
+  "final": {
+    "version": {
+      "name": "CalScope",
+      "schema": "calibration-applicability-capability-v1",
+      "version": 1
+    },
+    "certificate": {
+      "active": true,
+      "certificate_id": "CAL-2026-017",
+      "device_serial": "BAL-17",
+      "evidence_bytes": 443,
+      "evidence_sha256": "54bcaba189b96b90004c31c98cce27dec2477a0155ccc7908391491fdc764cf7",
+      "evidence_url": "https://raw.githubusercontent.com/eaglebooth/CalScope/e0805c2361acecee24127176e0a15c3a52fe47d7/fixtures/CERTIFICATE.md",
+      "exists": true,
+      "issuer": "0xeb57bc7125fa60d7482ce12058397369ab3581f8",
+      "issuer_authority_revision": 1,
+      "issuer_repository": "eaglebooth/calscope",
+      "revision": 1
+    },
+    "requirement": {
+      "device_serial": "BAL-17",
+      "evidence_bytes": 673,
+      "evidence_sha256": "c091dd2a343f46c36e529e8057dde8572d8c278594fc3ffa5ba2ca9316ca66e3",
+      "evidence_url": "https://raw.githubusercontent.com/eaglebooth/ClaimAnchor/b91162fe9973e252ca9016430893d4c7b19d6296/CALSCOPE_REQUIREMENT_JOB_204.md",
+      "exists": true,
+      "facility_authority_revision": 1,
+      "facility_id": "north-lab",
+      "facility_repository": "eaglebooth/claimanchor",
+      "job_id": "JOB-204",
+      "operator": "0x2da5393d7bbb9a037dc3abb56dbbc5c150fc843f",
+      "qa": "0x2da5393d7bbb9a037dc3abb56dbbc5c150fc843f",
+      "revision": 1
+    },
+    "assessment": {
+      "assessment_id": "d539ec67b9fed659d70cbe4c79e4e174d3b6e8e85a95decb1836277698c46269",
+      "authorization_id": "f6fa908fcc00e458f3e0987097d2be8175425146cd3841264c041d9f2cd8aea3",
+      "certificate_key": "0xeb57bc7125fa60d7482ce12058397369ab3581f8:CAL-2026-017",
+      "certificate_revision": 1,
+      "decision_digest": "5c0e8e941e7ceb592b3a115006dbcecfbc1c9b5cc9d08fcf01a3c7fd25ea7247",
+      "exists": true,
+      "requirement_key": "north-lab:JOB-204",
+      "requirement_revision": 1,
+      "verdict": "APPLICABLE"
+    },
+    "authorization": {
+      "assessment_id": "d539ec67b9fed659d70cbe4c79e4e174d3b6e8e85a95decb1836277698c46269",
+      "authorization_id": "f6fa908fcc00e458f3e0987097d2be8175425146cd3841264c041d9f2cd8aea3",
+      "binding_digest": "093c6f77384612df4d299751cbc76bd1978d17709fdc97dcdad3d6ea1832abed",
+      "consumed": true,
+      "device_serial": "BAL-17",
+      "exists": true,
+      "job_id": "JOB-204",
+      "operator": "0x2da5393d7bbb9a037dc3abb56dbbc5c150fc843f",
+      "receipt": "656d599b729efe38fc8b6d83c95f75efac668b34d4e1768c40aedd30596c71f4"
+    },
+    "stats": {
+      "assessments": 1,
+      "certificates": 1,
+      "consumed": 1,
+      "requirements": 1
+    }
+  }
+}

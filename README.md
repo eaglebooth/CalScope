@@ -4,6 +4,8 @@ CalScope is a contract-only GenLayer Intelligent Contract for one narrow decisio
 
 **Studionet contract:** [`0x89c65F2c7999CC55Ee8E21A35768CD9B1269e956`](https://explorer-studio.genlayer.com/address/0x89c65F2c7999CC55Ee8E21A35768CD9B1269e956) on chain `61999`.
 
+**Live verification:** [successful applicability lifecycle and finalized rejection matrix](docs/LIVE_STUDIONET_EVIDENCE.md).
+
 It is not a claim registry, challenge court or remediation workflow. Its output is a single-use capability bound to an exact device, job, operator, certificate revision and requirement revision.
 
 ## Why GenLayer
@@ -51,6 +53,8 @@ python -m pytest -q -p no:cacheprovider
 ```
 
 The suite executes the production contract with `gltest`. It covers sender authority, repository scoping, device binding, all bounded verdicts, content mutation, malformed model output, wrong operator, replay and post-assessment certificate revocation.
+
+The live runner is `scripts/live-e2e.mjs`. It reads two test-only wallet keys from stdin, never writes them to disk, and produces a sanitized machine-readable result in `docs/live-evidence/studionet-run.json`.
 
 ## Deploy
 

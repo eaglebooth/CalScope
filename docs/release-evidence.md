@@ -1,6 +1,6 @@
 # Release evidence
 
-Current status: **DEPLOYED — LIVE LIFECYCLE NOT YET EXECUTED**
+Current status: **DEPLOYED — LIVE LIFECYCLE VERIFIED**
 
 - Network: GenLayer Studionet
 - Chain ID: `61999`
@@ -32,7 +32,7 @@ Current status: **DEPLOYED — LIVE LIFECYCLE NOT YET EXECUTED**
 | Authority rotation | Stale certificate rejected after registry revision changes | PASS |
 | Studio schema | Loaded by `gltest` direct deployment | PASS |
 | Studionet deployment | Address and schema readback recorded above | PASS |
-| Live lifecycle | No finalized Studionet transactions yet | BLOCKED |
+| Live lifecycle | [`docs/LIVE_STUDIONET_EVIDENCE.md`](LIVE_STUDIONET_EVIDENCE.md) and machine-readable [`docs/live-evidence/studionet-run.json`](live-evidence/studionet-run.json) | PASS |
 
-Do not describe this revision as submission-ready until a fresh live evidence artifact records successful and rejected transactions plus authoritative readback.
+The lifecycle evidence covers authenticated certificate issuance, facility requirement sealing, semantic applicability assessment, one-time consumption, wrong issuer, wrong QA, wrong operator and replay rejection. No frontend is part of this contribution.
 
